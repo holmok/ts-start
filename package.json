@@ -1,0 +1,32 @@
+{
+  "name": "functions",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "author": "Christopher Holmok <christopher@holmok.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "@types/sinon": "^10.0.11",
+    "@types/tape": "^4.13.2",
+    "@typescript-eslint/parser": "^4.0.0",
+    "eslint": "^7.0.0",
+    "nyc": "^15.1.0",
+    "sinon": "^14.0.0",
+    "tap-spec": "^5.0.0",
+    "tape": "^5.5.3",
+    "ts-node": "^10.8.1",
+    "ts-standard": "^11.0.0",
+    "typescript": "<4.5.0"
+  },
+  "scripts": {
+    "lint": "ts-standard src/**/*.ts",
+    "clean": "rm -rf dist/",
+    "compile": "tsc",
+    "build": "yarn lint && yarn clean && yarn compile",
+    "test": "yarn lint && yarn nyc",
+    "tape": "tape --jobs=4 --require ts-node/register ./tests/**/*.test.ts | tap-spec",
+    "nyc": "nyc --reporter=text --reporter=text-summary --reporter=html yarn run tape",
+    "postnyc": "nyc check-coverage --statements 100 --branches 100 --functions 100 --lines 100",
+    "start": "ts-node src/index.ts"
+  }
+}
